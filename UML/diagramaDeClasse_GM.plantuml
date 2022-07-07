@@ -1,0 +1,193 @@
+@startuml
+allow_mixing
+
+package "Gestor de Mídias" {
+    package "persistence"{
+        class Usuario {
+             - id : numeric
+             - nome : String
+             - email : String
+             - password : String
+             + numeric getId()
+             + boolean setId()
+             + String getNome()
+             + boolean setNome()
+             + String getEmail()
+             + boolean setEmail()
+             + String getPassword()
+             + boolean setPassword()
+             }
+        
+    }
+    package "persistencelayer"{
+        package "DAO"{
+            class UserDAO_Mongoose {
+                   + boolean create(user)
+                   + List<User> find()
+                   }
+            interface IUserDAO <<interface>> {
+                 + boolean create(user)
+                 + List<User> find()
+                  }
+            IUserDAO <|..left UserDAO_Mongoose
+        }
+       
+       
+        package "controller"{
+       
+           interface IUserController <<interface>> {
+                 + User create(user)
+                 + boolean login(user)
+                  }
+            class UserController{
+                  + User create(user)
+                  + boolean login(user)
+                  }
+          IUserController <|..left UserController        
+        }
+        package "model"{
+            json "UserSchema" as userschema {
+                "id"  : "",
+                "email" : "",
+                "password": "",
+                "status" : "false"
+            }
+        }
+    }
+    package "servicelayer" {
+        package "View"{
+            interface IRoutes {
+                +void createroutes()
+            }
+            class UserRoutes {
+                +void createroutes()
+            }
+            IRoutes <|.. UserRoutes
+        }
+        package "DTO"{
+            json "UserLoginReq" as userloginreq {
+                "email" : "",
+                "password": ""
+            }
+            json "UserLoginRes" as userloginres {
+                "msgcode" : "001",
+                "userobject": "{}"
+            }
+            json "UserCreateReq" as usercreatereq{
+                "email" : "",
+                "password": "",
+                "confpassword": ""
+            }
+            json "UserCreateRes" as usercreateres{
+                "msgcode" : "002",
+                "userobject": "{}"
+            }
+
+        }
+
+    }
+
+}
+
+persistence -[hidden]--> persistencelayer
+persistencelayer -[hidden]--> servicelayer
+
+DAO -[hidden]--> model
+model -[hidden]--> controller
+
+
+''View -[hidden]--> DTO
+
+@enduml@startuml
+allow_mixing
+
+package "sysfit" {
+    package "persistence"{
+        class User {
+             - id : numeric
+             - login : String
+             - password : String
+             
+             + numeric getId()
+             }
+    }
+    package "persistencelayer"{
+        package "DAO"{
+            class UserDAO_Mongoose {
+                   + boolean create(user)
+                   + List<User> find()
+                   }
+            interface IUserDAO <<interface>> {
+                 + boolean create(user)
+                 + List<User> find()
+                  }
+            IUserDAO <|..left UserDAO_Mongoose
+        }
+       
+       
+        package "controller"{
+       
+           interface IUserController <<interface>> {
+                 + User create(user)
+                 + boolean login(user)
+                  }
+            class UserController{
+                  + User create(user)
+                  + boolean login(user)
+                  }
+          IUserController <|..left UserController        
+        }
+        package "model"{
+            json "UserSchema" as userschema {
+                "id"  : "",
+                "email" : "",
+                "password": "",
+                "status" : "false"
+            }
+        }
+    }
+    package "servicelayer" {
+        package "View"{
+            interface IRoutes {
+                +void createroutes()
+            }
+            class UserRoutes {
+                +void createroutes()
+            }
+            IRoutes <|.. UserRoutes
+        }
+        package "DTO"{
+            json "UserLoginReq" as userloginreq {
+                "email" : "",
+                "password": ""
+            }
+            json "UserLoginRes" as userloginres {
+                "msgcode" : "001",
+                "userobject": "{}"
+            }
+            json "UserCreateReq" as usercreatereq{
+                "email" : "",
+                "password": "",
+                "confpassword": ""
+            }
+            json "UserCreateRes" as usercreateres{
+                "msgcode" : "002",
+                "userobject": "{}"
+            }
+
+        }
+
+    }
+
+}
+
+persistence -[hidden]--> persistencelayer
+persistencelayer -[hidden]--> servicelayer
+
+DAO -[hidden]--> model
+model -[hidden]--> controller
+
+
+''View -[hidden]--> DTO
+
+@enduml
