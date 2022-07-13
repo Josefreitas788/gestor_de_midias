@@ -31,7 +31,7 @@ package "Gestor de Mídias" {
              + String getToken()
              + boolean setToken()
              }
-        class Foto {
+        class Midia {
                 - id : numeric
                 - path : String
                 + numeric getId()
@@ -41,7 +41,7 @@ package "Gestor de Mídias" {
                 
         }
         Usuario o-- Conta : 0..*
-        Usuario o-- Foto : 0..*
+        Usuario o-- Midia : 0..*
         
     }
     package "persistencelayer"{
@@ -75,19 +75,19 @@ package "Gestor de Mídias" {
                     }
             IContaDAO <|..left ContaDAO_Mongoose
             
-            interface IFotoDAO <<interface>> {
-                 + boolean create(foto)
-                 + List<foto> find()
-                 + boolean delete(foto)
-                 + boolean update(foto) 
+            interface IMidiaDAO <<interface>> {
+                 + boolean create(Midia)
+                 + List<Midia> find()
+                 + boolean delete(Midia)
+                 + boolean update(Midia) 
                   }
-            class FotoDAO_Mongoose {
-                    + boolean create(foto)
-                    + List<foto> find()
-                    + boolean delete(foto)
-                    + boolean update(foto) 
+            class MidiaDAO_Mongoose {
+                    + boolean create(Midia)
+                    + List<Midia> find()
+                    + boolean delete(Midia)
+                    + boolean update(Midia) 
                     }
-            IFotoDAO <|..left FotoDAO_Mongoose
+            IMidiaDAO <|..left MidiaDAO_Mongoose
             
         }
        
