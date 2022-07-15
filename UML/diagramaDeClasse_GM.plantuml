@@ -3,90 +3,20 @@ allow_mixing
 
 package "Gestor de Mídias" {
     package "persistence"{
-        class Usuario {
-             - id : numeric
-             - nome : String
-             - email : String
-             - password : String
-             + numeric getId()
-             + boolean setId()
-             + String getNome()
-             + boolean setNome()
-             + String getEmail()
-             + boolean setEmail()
-             + String getPassword()
-             + boolean setPassword()
-             }
+        
+        !include persistenceClasses.plantuml
 
-        class Conta {
-             - id : numeric
-             - tipoConta : String
-             - token : String
-             + numeric getId()
-             + boolean setId()
-             + String getTipoConta()
-             + boolean setTipoConta()
-             + String getEmail()
-             + boolean setEmail()
-             + String getToken()
-             + boolean setToken()
-             }
-        class Midia {
-                - id : numeric
-                - path : String
-                + numeric getId()
-                + boolean setId()
-                + String getPath()
-                + boolean setPath()
-                
-        }
         Usuario o-- Conta : 0..*
         Usuario o-- Midia : 0..*
         
     }
     package "persistencelayer"{
         package "DAO"{
-            class UsuarioDAO_Mongoose {
 
-                 + boolean create(usuario)
-                 + List<usuario> find()
-                 + boolean delete(usuario)
-                 + boolean update(usuario)
-                   }
-            interface IUsuarioDAO <<interface>> {
-                 + boolean create(usuario)
-                 + List<usuario> find()
-                 + boolean delete(usuario)
-                 + boolean update(usuario) 
-                  }
+            !include persistenceClassesAndInterface.plantuml
+            
             IUsuarioDAO <|..left UsuarioDAO_Mongoose
-            
-            interface IContaDAO <<interface>> {
-                 + boolean create(conta)
-                 + List<conta> find()
-                 + boolean delete(conta)
-                 + boolean update(conta) 
-                  }
-            class ContaDAO_Mongoose {
-                + boolean create(conta)
-                + List<conta> find()
-                + boolean delete(conta)
-                + boolean update(conta) 
-                    }
             IContaDAO <|..left ContaDAO_Mongoose
-            
-            interface IMidiaDAO <<interface>> {
-                 + boolean create(Midia)
-                 + List<Midia> find()
-                 + boolean delete(Midia)
-                 + boolean update(Midia) 
-                  }
-            class MidiaDAO_Mongoose {
-                    + boolean create(Midia)
-                    + List<Midia> find()
-                    + boolean delete(Midia)
-                    + boolean update(Midia) 
-                    }
             IMidiaDAO <|..left MidiaDAO_Mongoose
             
         }

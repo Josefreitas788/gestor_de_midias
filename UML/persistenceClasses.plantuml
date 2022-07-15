@@ -1,0 +1,37 @@
+class Usuario {
+             - id : numeric
+             - nome : String
+             - email : String
+             - password : String
+             + numeric getId()
+             + boolean setId()
+             + String getNome()
+             + boolean setNome()
+             + String getEmail()
+             + boolean setEmail()
+             + String getPassword()
+             + boolean setPassword()
+             }
+
+        class Conta {
+             - id : numeric
+             - tipoConta : String
+             - token : String
+             + numeric getId()
+             + boolean setId()
+             + String getTipoConta()
+             + boolean setTipoConta()
+             + String getEmail()
+             + boolean setEmail()
+             + String getToken()
+             + boolean setToken()
+             }
+        class Midia {
+                - id : numeric
+                - path : String
+                + numeric getId()
+                + boolean setId()
+                + String getPath()
+                + boolean setPath()
+                
+        }
