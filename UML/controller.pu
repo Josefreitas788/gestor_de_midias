@@ -1,0 +1,11 @@
+@startuml controller
+interface IUsuarioController <<interface>> {
+      + User create(usuario)
+      + boolean login(usuario)
+}
+class UserController{
+      + User create(user)
+      + boolean login(user)
+}
+
+@enduml

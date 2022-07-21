@@ -1,0 +1,42 @@
+@startuml dao
+class UsuarioDAO_Mongoose {
+    + boolean create(usuario)
+    + List<usuario> find()
+    + boolean delete(usuario)
+    + boolean update(usuario)
+}
+interface IUsuarioDAO <<interface>> {
+    + boolean create(usuario)
+    + List<usuario> find()
+    + boolean delete(usuario)
+    + boolean update(usuario)
+}
+
+interface IContaDAO <<interface>> {
+    + boolean create(conta)
+    + List<conta> find()
+    + boolean delete(conta)
+    + boolean update(conta)
+}
+class ContaDAO_Mongoose {
+    + boolean create(conta)
+    + List<conta> find()
+    + boolean delete(conta)
+    + boolean update(conta)
+}
+
+
+interface IFotoDAO <<interface>> {
+    + boolean create(foto)
+    + List<foto> find()
+    + boolean delete(foto)
+    + boolean update(foto)
+}
+class FotoDAO_Mongoose {
+    + boolean create(foto)
+    + List<foto> find()
+    + boolean delete(foto)
+    + boolean update(foto)
+}
+
+@enduml

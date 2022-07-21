@@ -1,0 +1,23 @@
+@startuml dto
+json "UserLoginReq" as userloginreq {
+    "email":"",
+    "password":""
+}
+
+json "UserLoginRes" as userloginres {
+    "msgcode" :"001",
+    "userobject":"{}"
+}
+
+json "UserCreateReq" as usercreatereq{
+    "email":"",
+    "password":"",
+    "confpassword":""
+}
+
+json "UserCreateRes" as usercreateres{
+    "msgcode":"002",
+    "userobject":"{}"
+}
+
+@enduml
