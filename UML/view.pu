@@ -1,0 +1,11 @@
+@startuml(id=view00)
+interface IRoutes {
+    +void createroutes()
+}
+@enduml
+
+@startuml(id=view01)
+class UserRoutes {
+    +void createroutes()
+}
+@enduml

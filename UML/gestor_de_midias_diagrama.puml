@@ -1,0 +1,63 @@
+@startuml gestor_de_midias_diagrama
+allow_mixing
+
+package "Gestor de Mídias" {
+    package "persistence"{
+
+       !include persistenceClasses.pu
+
+        Usuario o-- Conta : 0..*
+        Usuario o-- Foto : 0..*
+        
+    }
+
+    package "persistencelayer"{
+        package "DAO"{
+            !include dao.pu
+            
+            IUsuarioDAO <|..left UsuarioDAO_Mongoose
+            IContaDAO <|..left ContaDAO_Mongoose
+            IFotoDAO <|..left FotoDAO_Mongoose
+            
+        }
+       
+        package "controller"{
+            !include controller.pu
+           
+          IUserController <|..left UserController        
+        }
+
+        package "model"{
+            json "UserSchema" as userschema {
+                "id":"",
+                "email":"",
+                "password":"",
+                "status":"false"
+            }
+        }
+    }
+    package "servicelayer" {
+        package "View"{
+            !include  view.pu!view00
+            !include  view.pu!view01
+            IRoutes <|.. UserRoutes
+        }
+
+        package "DTO"{
+           !include dto.pu
+        }
+
+    }
+
+}
+
+persistence -[hidden]--> persistencelayer
+persistencelayer -[hidden]--> servicelayer
+
+DAO -[hidden]--> model
+model -[hidden]--> controller
+
+
+''View -[hidden]--> DTO
+
+@enduml
